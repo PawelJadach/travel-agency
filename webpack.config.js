@@ -8,10 +8,10 @@ const baseConfig = () => ({
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',
-    filename: 'scripts_bundle.js',
+    filename: 'scripts_bundle.js'
   },
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -19,16 +19,16 @@ const baseConfig = () => ({
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
-        },
-      },
-    ],
+          loader: 'babel-loader'
+        }
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-    }),
-  ],
+      template: './src/index.html'
+    })
+  ]
 });
 
 const devConfig = () => ({
@@ -42,42 +42,42 @@ const devConfig = () => ({
             loader: 'css-loader',
             query: {
               modules: true,
-              localIdentName: '[name]_[local]_[hash:base64:5]',
-            },
+              localIdentName: '[name]_[local]_[hash:base64:5]'
+            }
           },
-          'sass-loader',
-        ],
-      },
-    ],
-  },
+          'sass-loader'
+        ]
+      }
+    ]
+  }
 });
 
 const prodConfig = () => ({
   module: {
     rules: [
       {
-        test:/\.(s*)css$/,
+        test: /\.(s*)css$/,
         include: /flexboxgrid/,
-        use:[
+        use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             query: {
               modules: true,
-              localIdentName: '[name]_[local]_[hash:base64:5]',
-            },
+              localIdentName: '[name]_[local]_[hash:base64:5]'
+            }
           },
-          'sass-loader',
-        ],
-      },
-    ],
+          'sass-loader'
+        ]
+      }
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'styles_bundle_[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
+      chunkFilename: '[id].css'
+    })
+  ]
 });
 
 module.exports = (env, argv) => {

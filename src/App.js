@@ -1,6 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { BrowserRouter, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import MainLayout from './components/layout/MainLayout/MainLayout';
@@ -14,46 +14,63 @@ import Countries from './components/views/Countries/CountriesContainer';
 import Country from './components/views/Country/CountryContainer';
 import Regions from './components/views/Regions/RegionsContainer';
 import Trip from './components/views/Trip/TripContainer';
-
-
+import { AnimatedSwitch } from 'react-router-transition';
 
 import parseTrips from './utils/parseTrips';
-import {setMultipleStates} from './redux/globalRedux';
+import { setMultipleStates } from './redux/globalRedux';
+//import s from './App.css';
 
 class App extends React.Component {
   static propTypes = {
     trips: PropTypes.array,
     setStates: PropTypes.func,
-  }
+  };
 
-  constructor(props){
+  constructor(props) {
     super(props);
     // parse trips when App is first created
     parseTrips(this.props.trips, this.props.setStates);
   }
 
-  componentDidUpdate(prevProps){
-    if(prevProps.trips != this.props.trips){
+  componentDidUpdate(prevProps) {
+    if (prevProps.trips != this.props.trips) {
       // parse trips again if they changed
       parseTrips(this.props.trips, this.props.setStates);
     }
   }
 
-  render(){
+  mapstyles(styles) {
+    return {
+      opacity: styles.opacity,
+      transform: `scale(${styles.scale})`,
+    };
+  }
+
+  render() {
     return (
       <BrowserRouter>
         <MainLayout>
-          <Switch location={location}>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/trips' component={Trips} />
+          <AnimatedSwitch
+            className='switch-wrapper'
+            // location={location}
+            atEnter={{
+              opacity: 0,
+              scale: 1.2,
+            }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            mapStyles={this.mapstyles}
+          >
+            <Route exact path="/" component={Home} />
+            <Route exact path="/trips" component={Trips} />
             {/* TODO - add more routes for other views */}
-            <Route exact path='/info' component={Info} />
-            <Route exact path='/countries' component={Countries} />
-            <Route exact path='/regions' component={Regions} />
-            <Route exact path='/country/:id' component={Country} />
-            <Route exact path='/trip/:id' component={Trip} />
-            <Route path='*' component={NotFound} />
-          </Switch>
+            <Route exact path="/info" component={Info} />
+            <Route exact path="/countries" component={Countries} />
+            <Route exact path="/regions" component={Regions} />
+            <Route exact path="/country/:id" component={Country} />
+            <Route exact path="/trip/:id" component={Trip} />
+            <Route path="*" component={NotFound} />
+          </AnimatedSwitch>
         </MainLayout>
       </BrowserRouter>
     );
