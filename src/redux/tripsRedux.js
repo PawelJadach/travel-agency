@@ -33,7 +33,7 @@ export const getTripsForCountry = ({trips}, countryCode) => {
   const filtered = trips;
 
   // TODO - filter trips by countryCode
-  const tripsFiltered = filtered.filter(trip => trip.country.code === countryCode);
+  const tripsFiltered = filtered.filter(trip => trip.country.cFode === countryCode);
   console.log('filtering trips by countryCode:', countryCode, filtered);
   return tripsFiltered || [{error: true}];
 };
