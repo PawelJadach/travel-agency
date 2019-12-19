@@ -1,4 +1,4 @@
-export const formatPrice = price => {
+const formatPrice = price => {
   return typeof(price) != 'number'
     ? price
     : Math.ceil(price)
@@ -9,3 +9,5 @@ export const formatPrice = price => {
         maximumFractionDigits: 0,
       });
 };
+
+export default formatPrice;

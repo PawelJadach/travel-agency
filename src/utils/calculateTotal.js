@@ -1,7 +1,7 @@
 import pricing from '../data/pricing.json';
 import {parseOptionPrice} from './parseOptionPrice';
 
-export const calculateTotal = (tripCost, options) => {
+const calculateTotal = (tripCost, options) => {
   let total = parseOptionPrice(tripCost).value;
   let multiplier = 0;
   for (let option of pricing) {
@@ -42,3 +42,6 @@ export const calculateTotal = (tripCost, options) => {
   }
   return total * multiplier;
 };
+
+
+export default calculateTotal;
