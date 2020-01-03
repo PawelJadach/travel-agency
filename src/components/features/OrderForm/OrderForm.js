@@ -10,6 +10,9 @@ const OrderForm = ({ tripCost, options, setOrderOption }) => {
   return (
     <Grid>
       <Row>
+        <Col xs={12}>
+          <PageTitle text='Trip options' />
+        </Col>
         {pricing.map(price => {
           //console.log(price);
           return(
@@ -19,7 +22,7 @@ const OrderForm = ({ tripCost, options, setOrderOption }) => {
           );
         })}
         <Col xs={12}>
-          <PageTitle text='Trip options' />
+
           <OrderSummary cost={tripCost} opt={options}/>
         </Col>
       </Row>
