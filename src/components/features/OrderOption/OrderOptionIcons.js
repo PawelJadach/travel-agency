@@ -5,7 +5,7 @@ import Icon from '../../common/Icon/Icon';
 import formatPrice from '../../../utils/formatPrice';//
 
 const OrderOptionIcon = (props) => {
-  console.log(props.required);
+  //console.log(props.required);
   return (
     <div>
       {props.required === true ? null : (
