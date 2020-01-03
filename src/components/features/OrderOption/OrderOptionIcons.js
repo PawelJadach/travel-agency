@@ -24,7 +24,7 @@ const OrderOptionIcon = (props) => {
             //console.log(value.id);
           }}>
             <Icon name={value.icon}/>
-            {value.name}
+            { value.name + ' ' }
             {formatPrice(value.price)}
           </div>
         );

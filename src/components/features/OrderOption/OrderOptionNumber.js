@@ -8,7 +8,7 @@ const OrderOptionNumber = (props) => {
   return (
     <div className={styles.number}>
       <input type='number' className={styles.inputSmall} value={props.currentValue} min={props.limits.min} max={props.limits.max} onChange={event => props.setOptionValue(event.currentTarget.value)} />
-      {formatPrice(props.price)}
+      { ' ' + formatPrice(props.price)}
     </div>
   );
 };
