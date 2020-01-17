@@ -11,34 +11,40 @@ import calculateTotal from '../../../utils/calculateTotal';
 import Button from '../../common/Button/Button';
 
 
-const sendOrder = (options, tripCost) => {
-  const totalCost = formatPrice(calculateTotal(tripCost, options));
+const sendOrder = (options, tripCost, tripName, tripId) => {
 
-  const payload = {
-    ...options,
-    totalCost,
-  };
+  if(options.name !== '' && options.contact !== '') {
+    const totalCost = formatPrice(calculateTotal(tripCost, options));
 
-  const url = settings.db.url + '/' + settings.db.endpoint.orders;
+    const payload = {
+      ...options,
+      totalCost,
+      tripName,
+      tripId,
+    };
 
-  const fetchOptions = {
-    cache: 'no-cache',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  };
+    const url = settings.db.url + '/' + settings.db.endpoint.orders;
 
-  fetch(url, fetchOptions)
-    .then(function(response){
-      return response.json();
-    }).then(function(parsedResponse){
-      console.log('parsedResponse', parsedResponse);
-    });
+    const fetchOptions = {
+      cache: 'no-cache',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, fetchOptions)
+      .then(function(response){
+        return response.json();
+      }).then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
+      });
+  } else console.log('wypełnij pola kontakt i name!');
 };
 
-const OrderForm = ({ tripCost, options, setOrderOption }) => {
+const OrderForm = ({ tripCost, options, setOrderOption, tripName, tripId}) => {
+  //console.log(options);
   return (
     <Grid>
       <Row>
@@ -57,13 +63,15 @@ const OrderForm = ({ tripCost, options, setOrderOption }) => {
           <OrderSummary cost={tripCost} opt={options}/>
         </Col>
       </Row>
-      <Button onClick={() => sendOrder(options, tripCost)}>Order now!</Button>
+      <Button onClick={() => sendOrder(options, tripCost, tripName, tripId)}>Order now!</Button>
     </Grid>
   );
 };
 
 OrderForm.propTypes = {
   tripCost: PropTypes.string,
+  tripName: PropTypes.string,
+  tripId: PropTypes.string,
   options: PropTypes.Node,
   setOrderOption: PropTypes.func,
 };
