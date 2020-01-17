@@ -110,11 +110,66 @@ for(let type in optionTypes){
               expect(icon.length).toBe(2);
             });
 
+            it('should run setOptionValue function on click', () => {
+              renderedSubcomponent.find('Icon').simulate('click');
+              expect(mockSetOrderOption).toBeCalledTimes(1);
+            });
+            break;
+          }
+
+          case 'checkboxes': {
+            it('contains label and input', () => {
+              const input = renderedSubcomponent.find('input');
+              expect(input.length).toBe(1);
+
+              const label = renderedSubcomponent.find('label');
+              expect(label.length).toBe(1);
+            });
+
             // it('should run setOrderOption function on change', () => {
-            //   renderedSubcomponent.find('select').simulate('change', {currentTarget: {value: testValue}});
+            //   renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValue}});
             //   expect(mockSetOrderOption).toBeCalledTimes(1);
             //   expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
             // });
+            break;
+          }
+
+          case 'number': {
+            it('contains input and options', () => {
+              const input = renderedSubcomponent.find('input');
+              expect(input.length).toBe(1);
+
+              const options = input.find('option').not('[value=""]');
+              expect(options.length).toBe(mockProps.values.length);
+              expect(options.at(0).prop('value')).toBe(mockProps.values[0].id);
+              expect(options.at(1).prop('value')).toBe(mockProps.values[1].id);
+            });
+
+            it('should run setOrderOption function on change', () => {
+              renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValueNumber}});
+              expect(mockSetOrderOption).toBeCalledTimes(1);
+              expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValueNumber });
+            });
+            break;
+          }
+
+          case 'text': {
+            it('contains select and options', () => {
+              const input = renderedSubcomponent.find('input');
+              expect(input.length).toBe(1);
+
+
+              const options = input.find('option').not('[value=""]');
+              expect(options.length).toBe(mockProps.values.length);
+              expect(options.at(0).prop('value')).toBe(mockProps.values[0].id);
+              expect(options.at(1).prop('value')).toBe(mockProps.values[1].id);
+            });
+
+            it('should run setOrderOption function on change', () => {
+              renderedSubcomponent.find('input').simulate('change', {currentTarget: {value: testValue}});
+              expect(mockSetOrderOption).toBeCalledTimes(1);
+              expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
+            });
             break;
           }
         }
