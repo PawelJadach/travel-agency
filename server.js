@@ -6,7 +6,7 @@ if (!fs.existsSync(distDir)) {
   fs.mkdirSync(distDir);
 }
 
-const dbFileSrc = './src/db.json';
+const dbFileSrc = './src/data/db.json';
 const dbFileDist = distDir + '/db.json';
 
 if (
