@@ -15,7 +15,7 @@ const makeDate = (date) => {
 };
 
 const OrderOptionDate = (props) => {
-  console.log(props);
+  //console.log(props);
   return (
     <DatePicker
       value={props.currentValue}

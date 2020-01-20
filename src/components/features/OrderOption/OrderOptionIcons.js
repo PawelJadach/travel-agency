@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import Icon from '../../common/Icon/Icon';
 import formatPrice from '../../../utils/formatPrice';//
 
-const OrderOptionIcon = (props) => {
-  //console.log(props.required);
+const OrderOptionIcons = (props) => {
+  //console.log(props);
   return (
     <div>
       {props.required === true ? null : (
@@ -13,7 +13,7 @@ const OrderOptionIcon = (props) => {
           props.setOptionValue('');
         }}>
           <Icon name='times-circle'/>
-          none
+          
         </div>
       )}
       {props.values.map(value => {
@@ -33,12 +33,12 @@ const OrderOptionIcon = (props) => {
   );
 };
 
-OrderOptionIcon.propTypes = {
+OrderOptionIcons.propTypes = {
   values: PropTypes.array,
-  currentValue: PropTypes.array,
+  currentValue: PropTypes.string,
   defaultValue: PropTypes.string,
   setOptionValue: PropTypes.func,
   required: PropTypes.node,
 };
 
-export default OrderOptionIcon;
+export default OrderOptionIcons;
