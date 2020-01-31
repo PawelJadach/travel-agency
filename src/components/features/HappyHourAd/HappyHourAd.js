@@ -25,11 +25,11 @@ class HappyHourAd extends Component {
   }
 
   render (){
-    const { title } = this.props;
+    const { title, promoDescription } = this.props;
     return (
       <>
         <h3 className={styles.title}>{ title }</h3>
-        <div className={styles.promoDescription}>{ this.getCountdownTime() }</div>
+        <div className={styles.promoDescription}>{ this.getCountdownTime() > 82800 ? promoDescription : this.getCountdownTime() }</div>
       </>
     );
   }
