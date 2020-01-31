@@ -13,32 +13,6 @@ const mockProps = {
   promoDescription: '123',
 };
 
-beforeAll(() => {
-  const utilsModule = jest.requireActual('../../../utils/formatTime.js');
-  utilsModule.formatTime = jest.fn(seconds => seconds);
-});
-
-describe('Component HappyHourAd', () => {
-  it('shuld render without crashing', () => {
-    const component = shallow(<HappyHourAd />);
-    expect(component).toBeTruthy();
-  });
-
-  it('shuld render title and countdown', () => {
-    const component = shallow(<HappyHourAd />);
-    //   const subcomponent = component.find('div');
-    //   const renderedSubcomponent = subcomponent.dive();
-
-    expect(component.exists(select.title)).toEqual(true);
-    expect(component.exists(select.promoDescription)).toEqual(true);
-  });
-
-  it('shuld render title from props', () => {
-    const component = shallow(<HappyHourAd {...mockProps} />);
-    const title = component.find(select.title).text();
-    expect(title).toEqual(mockProps.title);
-  });
-});
 
 const trueDate = Date;
 const mockDate = customDate => class extends Date {
@@ -100,13 +74,3 @@ describe('Component HappyHourAd with mocked Date and delay', () => {
 });
 
 
-describe('Component HappyHourAd with mocked Date in promo Time', () => {
-  checkDescriptionAtTime('12:00:00', mockProps.promoDescription);
-  checkDescriptionAtTime('12:30:00', mockProps.promoDescription);
-  checkDescriptionAtTime('12:59:59', mockProps.promoDescription);
-});
-
-
-describe('Component HappyHourAd with mocked Date and delay should change seconds to promoString', () => {
-  checkDescriptionAfterTime('11:59:59', 1, mockProps.promoDescription);
-});
