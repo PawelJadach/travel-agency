@@ -1,5 +1,6 @@
 const formatPrice = price => {
-  return typeof(price) != 'number'
+  
+  const newPrice = typeof(price) != 'number'
     ? price
     : Math.ceil(price)
       .toLocaleString('en-US', {
@@ -8,6 +9,8 @@ const formatPrice = price => {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       });
+    //console.log(newPrice, price)
+  return newPrice;
 };
 
 export default formatPrice;

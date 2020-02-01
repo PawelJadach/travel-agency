@@ -26,7 +26,7 @@ describe('Component TripSummary', () => {
     const expectedDays = 13;
     const component = shallow(<TripSummary name={expectedName} cost={expectCost} days={expectedDays}/>);
     expect(component.find('.title').text()).toEqual(expectedName);
-    expect(component.find('.details').text()).toEqual(`${expectedDays} daysfrom ${expectCost}`);
+    expect(component.find('.details').text()).toEqual(`${expectedDays} daysfrom `);
   });
 
   it('should throw error without required props', () => {
